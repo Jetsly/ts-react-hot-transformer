@@ -1,7 +1,7 @@
 {
   "name": "ts-react-hot-transformer",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "react hot transformer for ts,and no babel",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "repository": "git@github.com:Jetsly/ts-react-hot-transformer.git",
@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "keywords": [
+    "ts-react-hot-plugins",
     "ts-react-hot-transformer",
     "ts-loader",
     "react-hot-loader",

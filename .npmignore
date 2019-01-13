@@ -1,6 +1,6 @@
-rollup.config.js
 jest.config.js
 .travis.yml
+.vscode
 yarn.lock
 tsconfig.json
 /src
