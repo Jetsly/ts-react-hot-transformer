@@ -1,0 +1,25 @@
+{
+  "name": "ts-rhl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ddot dev",
+    "build": "ddot build"
+  },
+  "devDependencies": {
+    "@ddot/ddot-cli": "^0.0.7",
+    "@ddot/ddot-plugin-webpack": "^0.0.14",
+    "@hot-loader/react-dom": "^16.7.0",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11"
+  },
+  "dependencies": {
+    "dva": "^2.4.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-loadable": "^5.5.0",
+    "react-hot-loader": "^4.6.3"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "suppressImplicitAnyIndexErrors": false,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "lib": ["es2015", "dom"],
+    "jsx": "react",
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "node_modules/**",
+    "packages/*/node_modules/**",
+    "packages/*/__tests__/*.test.ts",
+    "plugins/*/*.js"
+  ]
+}

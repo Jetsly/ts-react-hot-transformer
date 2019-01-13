@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`React components bindings.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+import P, { Q } from \\"left-pad\\";
+const A = 42;
+function B() {
+    function R() { }
+    class S {
+    }
+    const T = 42;
+}
+export class C {
+    U() {
+        function V() {
+            class W {
+            }
+        }
+    }
+    public __reactstandin__regenerateByEval(key, code) { this[key] = eval(code); }
+}
+const D = class X {
+};
+let E = D;
+var Y = require(\\"left-pad\\");
+var { Z } = require(\\"left-pad\\");
+const _default = React.createClass({})
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(A, \\"A\\", \\"bindings.js\\");
+reactHotLoader.register(B, \\"B\\", \\"bindings.js\\");
+reactHotLoader.register(C, \\"C\\", \\"bindings.js\\");
+reactHotLoader.register(D, \\"D\\", \\"bindings.js\\");
+reactHotLoader.register(E, \\"E\\", \\"bindings.js\\");
+reactHotLoader.register(_default, \\"default\\", \\"bindings.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components counter.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+class Counter {
+}
+const _default = () => <div><Counter /></div>
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(Counter, \\"Counter\\", \\"counter.js\\");
+reactHotLoader.register(_default, \\"default\\", \\"counter.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components drop hot.prod.js 1`] = `
+"import React from 'react';
+import { hot } from 'react-hot-loader/root';
+import { hot as namedHot, foo as namedFoo } from 'react-hot-loader/root';
+import { hot as namedHot2 } from 'react-hot-loader';
+import { hot as notRHLHot } from 'not-react-hot-loader';
+import * as RHL from 'react-hot-loader/root';
+import * as RHL2 from 'react-hot-loader/root';
+import * as NOTRHL from 'not-react-hot-loader';
+const App = () => <div>Hello World!</div>;
+const a = App;
+const b = App;
+const c = App;
+const d = App;
+const e = App;
+foo(App);
+notRHLHot(App);
+namedFoo(App);
+RHL.foo(App);
+NOTRHL.hot(App);
+export { a, b, c, d, e };
+"
+`;
+
+exports[`React components export default anonymous.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const _default = function () { }
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"export-default-anonymous.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components export default class.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const _default = class a {
+}
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"export-default-class.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components name clash.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const _default = 10;
+const _default2 = 42
+export default _default2;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"_default\\", \\"name-clash.js\\");
+reactHotLoader.register(_default2, \\"default\\", \\"name-clash.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
