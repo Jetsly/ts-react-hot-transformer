@@ -24,7 +24,7 @@
 For use with [node](http://nodejs.org) and [npm](https://npmjs.com):
 
 ```sh
-npm install --save-dev ts-react-hot-transformer
+npm install --save-dev ts-react-hot-transformer react-hot-loader
 ```
 
 ## Usage
