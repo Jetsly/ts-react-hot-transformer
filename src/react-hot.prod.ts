@@ -68,6 +68,6 @@ export default function transformer(context: ts.TransformationContext) {
       return ts.visitEachChild(node, visitor, context);
     };
     ts.visitNode(sourceFile, visitorImports);
-    return ts.visitNode(sourceFile, visitor);
+    return imports.length ? ts.visitNode(sourceFile, visitor) : sourceFile;
   };
 }
