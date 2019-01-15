@@ -1,4 +1,4 @@
-import P, { Q } from "left-pad";
+import P, { Q } from 'left-pad';
 const A = 42;
 function B() {
   function R() {}
@@ -13,7 +13,8 @@ export class C {
   }
 }
 const D = class X {};
+const { F, G } = { F: 'c' };
 let E = D;
-var Y = require("left-pad");
-var { Z } = require("left-pad");
+var Y = require('left-pad');
+var { Z } = require('left-pad');
 export default React.createClass({});

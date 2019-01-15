@@ -146,7 +146,13 @@ export default function transformer(context: ts.TransformationContext) {
               node.members
             ),
             ts.createVariableDeclarationList(
-              [ts.createVariableDeclaration(ID, undefined, ts.createIdentifier(node.name.getText()))],
+              [
+                ts.createVariableDeclaration(
+                  ID,
+                  undefined,
+                  ts.createIdentifier(node.name.getText())
+                ),
+              ],
               ts.NodeFlags.Const
             ),
             ts.createExportAssignment(undefined, undefined, false, ts.createIdentifier(ID)),
@@ -183,9 +189,17 @@ export default function transformer(context: ts.TransformationContext) {
       } else if (shouldRegisterBinding(node)) {
         let ids: string[] = [];
         if (ts.isVariableStatement(node)) {
-          ids = node.declarationList.declarations
+          node.declarationList.declarations
             .filter(filterVariableDeclaration)
-            .map(({ name }) => name.getText());
+            .forEach(declaration => {
+              if (ts.isObjectBindingPattern(declaration.name)) {
+                declaration.name.elements.forEach(e => {
+                  ids.push(e.name.getText());
+                });
+              } else {
+                ids.push(declaration.name.getText());
+              }
+            });
         } else if ((node as ts.FunctionDeclaration).name) {
           ids = [(node as ts.FunctionDeclaration).name.getText()];
         }

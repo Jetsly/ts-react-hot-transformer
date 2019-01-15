@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`React components drop hot.js 1`] = `
+"import React from 'react';
+import { hot } from 'react-hot-loader/root';
+import { hot as namedHot, foo as namedFoo } from 'react-hot-loader/root';
+import { hot as namedHot2 } from 'react-hot-loader';
+import { hot as notRHLHot } from 'not-react-hot-loader';
+import * as RHL from 'react-hot-loader/root';
+import * as RHL2 from 'react-hot-loader/root';
+import * as NOTRHL from 'not-react-hot-loader';
+const App = () => <div>Hello World!</div>;
+const a = App;
+const b = App;
+const c = App;
+const d = App;
+const e = App;
+foo(App);
+notRHLHot(App);
+namedFoo(App);
+RHL.foo(App);
+NOTRHL.hot(App);
+export { a, b, c, d, e };
+"
+`;

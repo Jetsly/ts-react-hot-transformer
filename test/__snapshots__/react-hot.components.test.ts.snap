@@ -8,7 +8,7 @@ exports[`React components bindings.js 1`] = `
 
 
 ;
-import P, { Q } from \\"left-pad\\";
+import P, { Q } from 'left-pad';
 const A = 42;
 function B() {
     function R() { }
@@ -27,9 +27,10 @@ export class C {
 }
 const D = class X {
 };
+const { F, G } = { F: 'c' };
 let E = D;
-var Y = require(\\"left-pad\\");
-var { Z } = require(\\"left-pad\\");
+var Y = require('left-pad');
+var { Z } = require('left-pad');
 const _default = React.createClass({})
 export default _default;
 
@@ -47,6 +48,8 @@ reactHotLoader.register(A, \\"A\\", \\"bindings.js\\");
 reactHotLoader.register(B, \\"B\\", \\"bindings.js\\");
 reactHotLoader.register(C, \\"C\\", \\"bindings.js\\");
 reactHotLoader.register(D, \\"D\\", \\"bindings.js\\");
+reactHotLoader.register(F, \\"F\\", \\"bindings.js\\");
+reactHotLoader.register(G, \\"G\\", \\"bindings.js\\");
 reactHotLoader.register(E, \\"E\\", \\"bindings.js\\");
 reactHotLoader.register(_default, \\"default\\", \\"bindings.js\\");
 
@@ -124,30 +127,6 @@ leaveModule(module);
 
 
 ;
-"
-`;
-
-exports[`React components drop hot.prod.js 1`] = `
-"import React from 'react';
-import { hot } from 'react-hot-loader/root';
-import { hot as namedHot, foo as namedFoo } from 'react-hot-loader/root';
-import { hot as namedHot2 } from 'react-hot-loader/root';
-import { hot as notRHLHot } from 'not-react-hot-loader';
-import * as RHL from 'react-hot-loader/root';
-import * as RHL2 from 'react-hot-loader/root';
-import * as NOTRHL from 'not-react-hot-loader';
-const App = () => <div>Hello World!</div>;
-const a = App;
-const b = App;
-const c = App;
-const d = App;
-const e = App;
-foo(App);
-notRHLHot(App);
-namedFoo(App);
-RHL.foo(App);
-NOTRHL.hot(App);
-export { a, b, c, d, e };
 "
 `;
 
