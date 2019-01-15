@@ -1,6 +1,6 @@
 {
   "name": "ts-react-hot-transformer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "react hot transformer for ts,and no babel",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

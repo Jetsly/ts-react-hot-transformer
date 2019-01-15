@@ -58,6 +58,41 @@ leaveModule(module);
 "
 `;
 
+exports[`React components classDecorator.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+import { connect } from 'dva';
+@connect()
+class Dashboard {
+}
+const _default = Dashboard
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"classDecorator.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
 exports[`React components counter.js 1`] = `
 "(function () {
      var enterModule = require('react-hot-loader').enterModule;

@@ -134,6 +134,24 @@ export default function transformer(context: ts.TransformationContext) {
             FILENAME: `"${fileName}"`,
           })
         );
+        if (ts.isClassDeclaration(node) && node.decorators) {
+          return [
+            ts.updateClassDeclaration(
+              node,
+              node.decorators,
+              undefined,
+              node.name,
+              node.typeParameters,
+              node.heritageClauses,
+              node.members
+            ),
+            ts.createVariableDeclarationList(
+              [ts.createVariableDeclaration(ID, undefined, ts.createIdentifier(node.name.getText()))],
+              ts.NodeFlags.Const
+            ),
+            ts.createExportAssignment(undefined, undefined, false, ts.createIdentifier(ID)),
+          ];
+        }
         const express: ts.Expression = ts.isExportAssignment(node)
           ? node.expression
           : ts.isFunctionDeclaration(node)
@@ -155,7 +173,6 @@ export default function transformer(context: ts.TransformationContext) {
               node.members
             )
           : undefined;
-
         return [
           ts.createVariableDeclarationList(
             [ts.createVariableDeclaration(ID, undefined, express)],
