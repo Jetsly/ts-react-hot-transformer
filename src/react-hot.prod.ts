@@ -1,6 +1,5 @@
 import * as ts from 'typescript';
-const RHLPackageRoot = `'react-hot-loader/root'`;
-const RHLPackage = `'react-hot-loader'`;
+const RHLPackageRoot = `react-hot-loader/root`;
 const propertyName = 'hot';
 enum ImportKind {
   named,
@@ -16,7 +15,10 @@ export default function transformer(context: ts.TransformationContext) {
       if (ts.isSourceFile(node)) {
         return ts.visitEachChild(node, visitorImports, context);
       } else if (ts.isImportDeclaration(node)) {
-        if ([RHLPackageRoot, RHLPackage].indexOf(node.moduleSpecifier.getText()) > -1) {
+        if (
+          ts.isStringLiteral(node.moduleSpecifier) &&
+          RHLPackageRoot === node.moduleSpecifier.text.trim()
+        ) {
           if (ts.isNamedImports(node.importClause.namedBindings)) {
             node.importClause.namedBindings.elements.forEach(element => {
               if (element.propertyName && element.propertyName.text === propertyName) {

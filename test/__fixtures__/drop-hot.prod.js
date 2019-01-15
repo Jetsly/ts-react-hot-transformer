@@ -1,7 +1,7 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { hot as namedHot, foo as namedFoo } from 'react-hot-loader/root'
-import { hot as namedHot2 } from 'react-hot-loader'
+import { hot as namedHot2 } from 'react-hot-loader/root'
 import { hot as notRHLHot } from 'not-react-hot-loader'
 import * as RHL from 'react-hot-loader/root'
 import * as RHL2 from 'react-hot-loader/root'
