@@ -12,7 +12,7 @@ function addRHLPlugin(prod = false) {
 describe('React components', () => {
   readdirSync(FIXTURES_DIR).forEach(fixtureName => {
     const fixtureFile = join(FIXTURES_DIR, fixtureName);
-    // const testFile: Array<string> = ['bindings.js'];
+    // const testFile: Array<string> = ['test.js'];
     // if (statSync(fixtureFile).isFile() && testFile.indexOf(fixtureName) > -1) {
     if (statSync(fixtureFile).isFile()) {
       it(fixtureName.split('-').join(' '), () => {

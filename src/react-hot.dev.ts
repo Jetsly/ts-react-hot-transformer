@@ -133,8 +133,10 @@ export default function transformer(context: ts.TransformationContext) {
     const identifiers = (sourceFile as any).identifiers as Map<string, any>;
     let ID = `_default`;
     let idx = 1;
-    while (identifiers.has(ID)) {
-      ID = `_default${++idx}`;
+    if (typeof identifiers !== 'undefined') {
+      while (identifiers.has(ID)) {
+        ID = `_default${++idx}`;
+      }
     }
     const REGISTRATIONS = [];
     const visitor: ts.Visitor = node => {
