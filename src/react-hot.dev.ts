@@ -66,6 +66,20 @@ function isExportDefaultDeclaration(node) {
   );
 }
 
+function forEachBindingPattern(node) {
+  const ids: string[] = [];
+  if (ts.isObjectBindingPattern(node) || ts.isArrayBindingPattern(node)) {
+    node.elements.forEach(e => {
+      if (ts.isIdentifier(e.name)) {
+        ids.push(e.name.getText());
+      } else {
+        ids.push(...forEachBindingPattern(e.name));
+      }
+    });
+  }
+  return ids;
+}
+
 export default function transformer(context: ts.TransformationContext) {
   const visitorClass: ts.Visitor = node => {
     if (ts.isClassDeclaration(node)) {
@@ -192,12 +206,10 @@ export default function transformer(context: ts.TransformationContext) {
           node.declarationList.declarations
             .filter(filterVariableDeclaration)
             .forEach(declaration => {
-              if (ts.isObjectBindingPattern(declaration.name)) {
-                declaration.name.elements.forEach(e => {
-                  ids.push(e.name.getText());
-                });
-              } else {
+              if (ts.isIdentifier(declaration.name)) {
                 ids.push(declaration.name.getText());
+              } else {
+                ids.push(...forEachBindingPattern(declaration.name));
               }
             });
         } else if ((node as ts.FunctionDeclaration).name) {
