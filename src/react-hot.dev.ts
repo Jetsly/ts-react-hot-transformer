@@ -156,26 +156,31 @@ export default function transformer() {
             })
           );
           if (ts.isClassDeclaration(node) && node.decorators) {
+            const name = node.name
+              ? ts.createIdentifier(node.name.getText())
+              : ts.createIdentifier(ID);
             return [
               ts.updateClassDeclaration(
                 node,
                 node.decorators,
                 undefined,
-                node.name,
+                name,
                 node.typeParameters,
                 node.heritageClauses,
                 node.members
               ),
-              ts.createVariableDeclarationList(
-                [
-                  ts.createVariableDeclaration(
-                    ID,
-                    undefined,
-                    ts.createIdentifier(node.name.getText())
-                  ),
-                ],
-                ts.NodeFlags.Const
-              ),
+              node.name
+                ? ts.createVariableDeclarationList(
+                    [
+                      ts.createVariableDeclaration(
+                        ID,
+                        undefined,
+                        ts.createIdentifier(node.name.getText())
+                      ),
+                    ],
+                    ts.NodeFlags.Const
+                  )
+                : ts.createEmptyStatement(),
               ts.createExportAssignment(undefined, undefined, false, ts.createIdentifier(ID)),
             ];
           }
