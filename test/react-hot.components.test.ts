@@ -18,7 +18,7 @@ describe('React components', () => {
       it(fixtureName.split('-').join(' '), () => {
         const sourceCode = readFileSync(fixtureFile, 'utf-8');
         const source = ts.createSourceFile(fixtureName, sourceCode, ts.ScriptTarget.ES2016, true);
-        const result = ts.transform(source, [addRHLPlugin(false)]);
+        const result = ts.transform(source, [addRHLPlugin(false)()]);
         const transformedSourceFile = result.transformed[0];
         const resultCode = printer.printFile(transformedSourceFile);
         expect(resultCode).toMatchSnapshot();

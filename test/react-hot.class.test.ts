@@ -19,7 +19,7 @@ describe('copies arrow function body block onto hidden class methods', () => {
       it(fixtureName.split('-').join(' '), () => {
         const sourceCode = readFileSync(fixtureFile, 'utf-8');
         const source = ts.createSourceFile(fixtureName, sourceCode, ts.ScriptTarget.ES2016, true);
-        const result = ts.transform(source, [addRHLPlugin()]);
+        const result = ts.transform(source, [addRHLPlugin()()]);
         const transformedSourceFile = result.transformed[0];
         const resultCode = printer.printFile(transformedSourceFile);
         expect(resultCode).toMatchSnapshot();
@@ -27,4 +27,3 @@ describe('copies arrow function body block onto hidden class methods', () => {
     }
   });
 });
-

@@ -6,8 +6,8 @@ enum ImportKind {
   named,
   namespace,
 }
-export default function transformer(context: ts.TransformationContext) {
-  return (sourceFile: ts.SourceFile) => {
+export default function transformer() {
+  return (context: ts.TransformationContext) => (sourceFile: ts.SourceFile) => {
     const imports: Array<{
       kind: ImportKind;
       local: string;
@@ -63,14 +63,17 @@ export default function transformer(context: ts.TransformationContext) {
               return node.arguments[0];
             }
           }
-        } else if(ts.isCallExpression(node.expression)){
+        } else if (ts.isCallExpression(node.expression)) {
           const methodName = node.expression.expression.getText();
           for (let index = 0; index < imports.length; index++) {
             const element = imports[index];
             if (element.kind === ImportKind.named && methodName === element.local) {
-              if (element.isRoot === false && node.expression.arguments.length &&
-                 node.expression.arguments[0].getText() === 'module'){
-                  return node.arguments[0];
+              if (
+                element.isRoot === false &&
+                node.expression.arguments.length &&
+                node.expression.arguments[0].getText() === 'module'
+              ) {
+                return node.arguments[0];
               }
             }
           }
