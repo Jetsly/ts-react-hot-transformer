@@ -28,9 +28,12 @@ export class C {
 const D = class X {
 };
 const { F, G } = { F: 'c' };
+const [H, J] = [1, 2];
 let E = D;
 var Y = require('left-pad');
 var { Z } = require('left-pad');
+const { a: { O: [OO], }, c: { MM }, } = {};
+const [{ P }] = [];
 const _default = React.createClass({})
 export default _default;
 
@@ -50,7 +53,12 @@ reactHotLoader.register(C, \\"C\\", \\"bindings.js\\");
 reactHotLoader.register(D, \\"D\\", \\"bindings.js\\");
 reactHotLoader.register(F, \\"F\\", \\"bindings.js\\");
 reactHotLoader.register(G, \\"G\\", \\"bindings.js\\");
+reactHotLoader.register(H, \\"H\\", \\"bindings.js\\");
+reactHotLoader.register(J, \\"J\\", \\"bindings.js\\");
 reactHotLoader.register(E, \\"E\\", \\"bindings.js\\");
+reactHotLoader.register(OO, \\"OO\\", \\"bindings.js\\");
+reactHotLoader.register(MM, \\"MM\\", \\"bindings.js\\");
+reactHotLoader.register(P, \\"P\\", \\"bindings.js\\");
 reactHotLoader.register(_default, \\"default\\", \\"bindings.js\\");
 
 leaveModule(module);
