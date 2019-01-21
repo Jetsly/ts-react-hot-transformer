@@ -12,13 +12,13 @@ function addRHLPlugin(prod = false) {
 describe('React components', () => {
   readdirSync(FIXTURES_DIR).forEach(fixtureName => {
     const fixtureFile = join(FIXTURES_DIR, fixtureName);
-    // const testFile: Array<string> = ['bindings.js'];
+    // const testFile: Array<string> = ['classAnonymousDecorator.js','classAnonymous.js'];
     // if (statSync(fixtureFile).isFile() && testFile.indexOf(fixtureName) > -1) {
     if (statSync(fixtureFile).isFile()) {
       it(fixtureName.split('-').join(' '), () => {
         const sourceCode = readFileSync(fixtureFile, 'utf-8');
         const source = ts.createSourceFile(fixtureName, sourceCode, ts.ScriptTarget.ES2016, true);
-        const result = ts.transform(source, [addRHLPlugin(false)]);
+        const result = ts.transform(source, [addRHLPlugin(false)()]);
         const transformedSourceFile = result.transformed[0];
         const resultCode = printer.printFile(transformedSourceFile);
         expect(resultCode).toMatchSnapshot();

@@ -69,6 +69,80 @@ leaveModule(module);
 "
 `;
 
+exports[`React components classAnonymous.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const a = new class {
+    fun() { }
+}();
+const _default = class {
+}
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(a, \\"a\\", \\"classAnonymous.js\\");
+reactHotLoader.register(_default, \\"default\\", \\"classAnonymous.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components classAnonymousDecorator.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const a = new class {
+    fun() { }
+}();
+@ccccc
+class _default {
+}
+;
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(a, \\"a\\", \\"classAnonymousDecorator.js\\");
+reactHotLoader.register(_default, \\"default\\", \\"classAnonymousDecorator.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
 exports[`React components classDecorator.js 1`] = `
 "(function () {
      var enterModule = require('react-hot-loader').enterModule;
