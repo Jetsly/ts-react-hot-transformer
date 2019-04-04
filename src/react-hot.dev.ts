@@ -10,10 +10,12 @@ const shouldIgnoreFile = file =>
     .match(/node_modules\/(react|react-hot-loader)([\/]|$)/);
 const template = (tpl: string) => (data?: { [key: string]: any }) =>
   tpl.replace(placeholderPattern, pattern =>
-    Array.isArray(data[pattern]) ? data[pattern].join('\n') : data[pattern]
+    Array.isArray(data[pattern]) ? data[pattern].join('\n') : data[pattern],
   );
 const emptyStatement = ts.createStatement(ts.createIdentifier('\n\n'));
-const buildRegistration = template('reactHotLoader.register(ID, NAME, FILENAME);');
+const buildRegistration = template(
+  'reactHotLoader.register(ID, NAME, FILENAME);',
+);
 const headerTemplate = template(`(function () {
      var enterModule = require('react-hot-loader').enterModule;
      enterModule && enterModule(module);
@@ -44,7 +46,9 @@ function shouldRegisterBinding(node: ts.Node) {
 function filterVariableDeclaration(declaration: ts.VariableDeclaration) {
   if (
     declaration.modifiers &&
-    declaration.modifiers.filter(({ kind }) => kind === ts.SyntaxKind.DeclareKeyword).length > 0
+    declaration.modifiers.filter(
+      ({ kind }) => kind === ts.SyntaxKind.DeclareKeyword,
+    ).length > 0
   ) {
     return false;
   }
@@ -61,7 +65,10 @@ function isExportDefaultDeclaration(node) {
   return (
     node.modifiers &&
     node.modifiers.filter(
-      ({ kind }) => [ts.SyntaxKind.ExportKeyword, ts.SyntaxKind.DefaultKeyword].indexOf(kind) > -1
+      ({ kind }) =>
+        [ts.SyntaxKind.ExportKeyword, ts.SyntaxKind.DefaultKeyword].indexOf(
+          kind,
+        ) > -1,
     ).length === 2
   );
 }
@@ -90,8 +97,9 @@ export default function transformer() {
           .filter(
             member =>
               member.modifiers === undefined ||
-              member.modifiers.filter(({ kind }) => kind === ts.SyntaxKind.StaticKeyword).length ===
-                0
+              member.modifiers.filter(
+                ({ kind }) => kind === ts.SyntaxKind.StaticKeyword,
+              ).length === 0,
           )
           .forEach(member => {
             if (
@@ -125,9 +133,11 @@ export default function transformer() {
                 ],
                 undefined,
 
-                ts.createBlock([ts.createStatement(ts.createIdentifier(evalTemplate()))])
+                ts.createBlock([
+                  ts.createStatement(ts.createIdentifier(evalTemplate())),
+                ]),
               ),
-            ])
+            ]),
           );
         }
       }
@@ -146,14 +156,21 @@ export default function transformer() {
       const REGISTRATIONS = [];
       const visitor: ts.Visitor = node => {
         if (ts.isSourceFile(node)) {
-          return ts.visitEachChild(node, visitor, context);
-        } else if (ts.isExportAssignment(node) || isExportDefaultDeclaration(node)) {
+          try {
+            return ts.visitEachChild(node, visitor, context);
+          } catch (error) {
+            return node;
+          }
+        } else if (
+          ts.isExportAssignment(node) ||
+          isExportDefaultDeclaration(node)
+        ) {
           REGISTRATIONS.push(
             buildRegistration({
               ID,
               NAME: `"default"`,
               FILENAME: `"${fileName}"`,
-            })
+            }),
           );
           if (ts.isClassDeclaration(node) && node.decorators) {
             const name = node.name
@@ -167,7 +184,7 @@ export default function transformer() {
                 name,
                 node.typeParameters,
                 node.heritageClauses,
-                node.members
+                node.members,
               ),
               node.name
                 ? ts.createVariableDeclarationList(
@@ -175,13 +192,18 @@ export default function transformer() {
                       ts.createVariableDeclaration(
                         ID,
                         undefined,
-                        ts.createIdentifier(node.name.getText())
+                        ts.createIdentifier(node.name.getText()),
                       ),
                     ],
-                    ts.NodeFlags.Const
+                    ts.NodeFlags.Const,
                   )
                 : ts.createEmptyStatement(),
-              ts.createExportAssignment(undefined, undefined, false, ts.createIdentifier(ID)),
+              ts.createExportAssignment(
+                undefined,
+                undefined,
+                false,
+                ts.createIdentifier(ID),
+              ),
             ];
           }
           const express: ts.Expression = ts.isExportAssignment(node)
@@ -194,7 +216,7 @@ export default function transformer() {
                 node.typeParameters,
                 node.parameters,
                 node.type,
-                node.body
+                node.body,
               )
             : ts.isClassDeclaration(node)
             ? ts.createClassExpression(
@@ -202,15 +224,20 @@ export default function transformer() {
                 node.name,
                 node.typeParameters,
                 node.heritageClauses,
-                node.members
+                node.members,
               )
             : undefined;
           return [
             ts.createVariableDeclarationList(
               [ts.createVariableDeclaration(ID, undefined, express)],
-              ts.NodeFlags.Const
+              ts.NodeFlags.Const,
             ),
-            ts.createExportAssignment(undefined, undefined, false, ts.createIdentifier(ID)),
+            ts.createExportAssignment(
+              undefined,
+              undefined,
+              false,
+              ts.createIdentifier(ID),
+            ),
           ];
         } else if (shouldRegisterBinding(node)) {
           let ids: string[] = [];
@@ -233,27 +260,33 @@ export default function transformer() {
                 ID: id,
                 NAME: `"${id}"`,
                 FILENAME: `"${fileName}"`,
-              })
-            )
+              }),
+            ),
           );
         }
         return node;
       };
       let newSourceFile = ts.visitNode(sourceFile, visitorClass);
       newSourceFile = ts.visitNode(newSourceFile, visitor);
-      if (REGISTRATIONS && REGISTRATIONS.length && !shouldIgnoreFile(fileName)) {
+      if (
+        REGISTRATIONS &&
+        REGISTRATIONS.length &&
+        !shouldIgnoreFile(fileName)
+      ) {
         const header: ts.Statement[] = [
           ts.createStatement(ts.createIdentifier(headerTemplate())),
           emptyStatement,
         ];
         const footer: ts.Statement[] = [
           emptyStatement,
-          ts.createStatement(ts.createIdentifier(buildTagger({ REGISTRATIONS }))),
+          ts.createStatement(
+            ts.createIdentifier(buildTagger({ REGISTRATIONS })),
+          ),
           emptyStatement,
         ];
         return ts.updateSourceFileNode(
           newSourceFile,
-          header.concat(newSourceFile.statements).concat(footer)
+          header.concat(newSourceFile.statements).concat(footer),
         );
       }
       return newSourceFile;

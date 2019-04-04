@@ -244,6 +244,40 @@ leaveModule(module);
 "
 `;
 
+exports[`copies arrow function body block onto hidden class methods export default.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const _default = {
+    'app.title': 'BMS',
+    'app.desc': 'A Manager platform for BMS',
+}
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"export-default.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
 exports[`copies arrow function body block onto hidden class methods expression body.js 1`] = `
 "(function () {
      var enterModule = require('react-hot-loader').enterModule;

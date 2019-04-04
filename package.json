@@ -1,6 +1,6 @@
 {
   "name": "ts-react-hot-transformer",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "descripton": "react hot transformer for ts,and no babel",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -27,6 +27,6 @@
     "jest": "^23.6.0",
     "ts-import-plugin": "^1.5.5",
     "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
+    "typescript": "^3.4.1"
   }
 }

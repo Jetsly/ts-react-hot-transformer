@@ -67,6 +67,9 @@ export default function transformer() {
           const methodName = node.expression.expression.getText();
           for (let index = 0; index < imports.length; index++) {
             const element = imports[index];
+            // if(ts.isTypeReferenceNode(node.expression.expression)){
+            //   node.expression.expression.typeArguments
+            // }
             if (element.kind === ImportKind.named && methodName === element.local) {
               if (
                 element.isRoot === false &&
@@ -86,6 +89,7 @@ export default function transformer() {
             }
           }
         }
+        return node;
       }
       return ts.visitEachChild(node, visitor, context);
     };

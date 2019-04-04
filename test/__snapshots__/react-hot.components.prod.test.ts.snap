@@ -11,7 +11,6 @@ import * as RHL2 from 'react-hot-loader/root';
 import * as NOTRHL from 'not-react-hot-loader';
 const App = () => <div>Hello World!</div>;
 const a = App;
-const b = App;
 const c = App;
 const d = App;
 const e = App;
@@ -21,5 +20,9 @@ namedFoo(App);
 RHL.foo(App);
 NOTRHL.hot(App);
 export { a, b, c, d, e };
+(function (namedHot2) {
+    const b = namedHot(App);
+    const c = namedHot2(module)(App);
+})(1);
 "
 `;
