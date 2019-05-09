@@ -255,7 +255,7 @@ exports[`copies arrow function body block onto hidden class methods export defau
 const _default = {
     'app.title': 'BMS',
     'app.desc': 'A Manager platform for BMS',
-}
+};
 export default _default;
 
 

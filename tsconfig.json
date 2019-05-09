@@ -4,6 +4,8 @@
     "module": "commonjs",
     "declaration": true,
     "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "outDir": "lib",
     "lib": ["es2015", "dom"]
   },

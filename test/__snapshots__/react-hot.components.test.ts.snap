@@ -34,7 +34,7 @@ var Y = require('left-pad');
 var { Z } = require('left-pad');
 const { a: { O: [OO], }, c: { MM }, } = {};
 const [{ P }] = [];
-const _default = React.createClass({})
+const _default = React.createClass({});
 export default _default;
 
 
@@ -80,7 +80,7 @@ exports[`React components classAnonymous.js 1`] = `
 const a = new class {
     fun() { }
 }();
-const _default = class {
+export class _default {
 }
 export default _default;
 
@@ -117,9 +117,8 @@ const a = new class {
     fun() { }
 }();
 @ccccc
-class _default {
+export class _default {
 }
-;
 export default _default;
 
 
@@ -153,9 +152,8 @@ exports[`React components classDecorator.js 1`] = `
 ;
 import { connect } from 'dva';
 @connect()
-class Dashboard {
+export class _default {
 }
-const _default = Dashboard
 export default _default;
 
 
@@ -188,7 +186,7 @@ exports[`React components counter.js 1`] = `
 ;
 class Counter {
 }
-const _default = () => <div><Counter /></div>
+const _default = () => <div><Counter /></div>;
 export default _default;
 
 
@@ -220,7 +218,7 @@ exports[`React components export default anonymous.js 1`] = `
 
 
 ;
-const _default = function () { }
+export function _default() { }
 export default _default;
 
 
@@ -251,7 +249,7 @@ exports[`React components export default class.js 1`] = `
 
 
 ;
-const _default = class a {
+export class _default {
 }
 export default _default;
 
@@ -275,6 +273,74 @@ leaveModule(module);
 "
 `;
 
+exports[`React components export default object.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+const _default = {
+    namespace: 'config',
+    state: {},
+};
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"export-default-object.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
+exports[`React components export default value.js 1`] = `
+"(function () {
+     var enterModule = require('react-hot-loader').enterModule;
+     enterModule && enterModule(module);
+   }());
+
+
+;
+import router from '/src/router';
+import * as React from 'react';
+import { hot } from 'react-hot-loader/root';
+const _default = hot(React.createElement.bind(React, router));
+export default _default;
+
+
+;
+(function () {
+var reactHotLoader = require('react-hot-loader').default;
+var leaveModule = require('react-hot-loader').leaveModule;
+
+if (!reactHotLoader) {
+  return;
+}
+
+reactHotLoader.register(_default, \\"default\\", \\"export-default-value.js\\");
+
+leaveModule(module);
+}());
+
+
+;
+"
+`;
+
 exports[`React components name clash.js 1`] = `
 "(function () {
      var enterModule = require('react-hot-loader').enterModule;
@@ -284,7 +350,7 @@ exports[`React components name clash.js 1`] = `
 
 ;
 const _default = 10;
-const _default2 = 42
+const _default2 = 42;
 export default _default2;
 
 

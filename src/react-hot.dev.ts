@@ -172,32 +172,64 @@ export default function transformer() {
               FILENAME: `"${fileName}"`,
             }),
           );
-          if (ts.isClassDeclaration(node) && node.decorators) {
-            const name = node.name
-              ? ts.createIdentifier(node.name.getText())
-              : ts.createIdentifier(ID);
+          const modifiers = node.modifiers
+            ? node.modifiers.filter(
+                modifier => modifier.kind !== ts.SyntaxKind.DefaultKeyword,
+              )
+            : undefined;
+          if (ts.isClassDeclaration(node)) {
             return [
               ts.updateClassDeclaration(
                 node,
                 node.decorators,
-                undefined,
-                name,
+                modifiers,
+                ts.createIdentifier(ID),
                 node.typeParameters,
                 node.heritageClauses,
                 node.members,
               ),
-              node.name
-                ? ts.createVariableDeclarationList(
-                    [
-                      ts.createVariableDeclaration(
-                        ID,
-                        undefined,
-                        ts.createIdentifier(node.name.getText()),
-                      ),
-                    ],
-                    ts.NodeFlags.Const,
-                  )
-                : ts.createEmptyStatement(),
+              ts.createExportAssignment(
+                undefined,
+                undefined,
+                false,
+                ts.createIdentifier(ID),
+              ),
+            ];
+          } else if (ts.isFunctionDeclaration(node)) {
+            return [
+              ts.updateFunctionDeclaration(
+                node,
+                node.decorators,
+                modifiers,
+                node.asteriskToken,
+                ts.createIdentifier(ID),
+                node.typeParameters,
+                node.parameters,
+                node.type,
+                node.body,
+              ),
+              ts.createExportAssignment(
+                undefined,
+                undefined,
+                false,
+                ts.createIdentifier(ID),
+              ),
+            ];
+          } else if (ts.isExportAssignment(node)) {
+            return [
+              ts.createVariableStatement(
+                undefined,
+                ts.createVariableDeclarationList(
+                  [
+                    ts.createVariableDeclaration(
+                      ID,
+                      undefined,
+                      node.expression,
+                    ),
+                  ],
+                  ts.NodeFlags.Const,
+                ),
+              ),
               ts.createExportAssignment(
                 undefined,
                 undefined,
@@ -206,39 +238,7 @@ export default function transformer() {
               ),
             ];
           }
-          const express: ts.Expression = ts.isExportAssignment(node)
-            ? node.expression
-            : ts.isFunctionDeclaration(node)
-            ? ts.createFunctionExpression(
-                undefined,
-                undefined,
-                node.name,
-                node.typeParameters,
-                node.parameters,
-                node.type,
-                node.body,
-              )
-            : ts.isClassDeclaration(node)
-            ? ts.createClassExpression(
-                undefined,
-                node.name,
-                node.typeParameters,
-                node.heritageClauses,
-                node.members,
-              )
-            : undefined;
-          return [
-            ts.createVariableDeclarationList(
-              [ts.createVariableDeclaration(ID, undefined, express)],
-              ts.NodeFlags.Const,
-            ),
-            ts.createExportAssignment(
-              undefined,
-              undefined,
-              false,
-              ts.createIdentifier(ID),
-            ),
-          ];
+          return node;
         } else if (shouldRegisterBinding(node)) {
           let ids: string[] = [];
           if (ts.isVariableStatement(node)) {
